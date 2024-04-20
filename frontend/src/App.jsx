@@ -55,6 +55,7 @@ function App() {
                 <td>{d.task_name}</td>
                 <td>{d.deadline}</td>
                 <td>
+                  
                   <button onClick={() => handleDelete(d.id)} className="btn btn-outline-danger">DELETE</button>
                 </td>
               </tr>
