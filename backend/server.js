@@ -46,6 +46,20 @@ app.post('/delete_task', (req, res) => {
     });
 });
 
+// Endpoint to handle task update
+app.post('/update_task', (req, res) => {
+    const { id, updatedData } = req.body; // Extract id and updatedData from request body
+    const query = "UPDATE `tbl_tasklist` SET ? WHERE id = ?";
+    db.query(query, [updatedData, id], (err, result) => {
+        if (err) {
+            console.error('Error updating task:', err);
+            return res.json({ success: false, error: err.message });
+        }
+        return res.json({ success: true });
+    });
+});
+
+
 app.listen(8081, () => {
     console.log("Server listening on port 8081");
 });
