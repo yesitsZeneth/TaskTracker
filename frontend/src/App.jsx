@@ -57,7 +57,7 @@ function App() {
   return (
     <div>
       <div className="card">
-        <h2>Task Tracking Management System</h2>
+        <h2>Task Tracking Management System Emmanuelle</h2>
         <div>
           <a href="#" style={{ float: 'right' }} className="btn btn-primary">Add Task</a>
         </div>
