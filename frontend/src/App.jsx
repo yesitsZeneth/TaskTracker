@@ -34,7 +34,7 @@ function App() {
 
   return (
     <div className="card">
-      <h2>Task Trackingggg Management</h2>
+      <h2>Task Track ejManagement</h2>
       <div>
         <a href="#" style={{ float: 'right' }} className="btn btn-primary">Add Task</a>
       </div>
