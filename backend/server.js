@@ -4,6 +4,7 @@ const cors = require('cors');
 
 const app = express();
 app.use(cors());
+app.use(express.json()); // Middleware to parse JSON requests
 
 const db = mysql.createConnection({
     host: 'localhost',
@@ -12,7 +13,15 @@ const db = mysql.createConnection({
     database: 'db_tasks'
 });
 
-app.get('/', (re, res) => {
+db.connect((err) => {
+    if (err) {
+        console.error('Error connecting to database:', err);
+        return;
+    }
+    console.log('Connected to the database');
+});
+
+app.get('/', (req, res) => {
     return res.json("From Backend Side");
 });
 
@@ -24,7 +33,19 @@ app.get('/tbl_tasklist', (req, res) => {
     });
 });
 
-app.listen(8081, () => {
-    console.log("listening");
+// Endpoint to handle task deletion
+app.post('/delete_task', (req, res) => {
+    const id = req.body.id; // Extract id from request body
+    const query = "DELETE FROM `tbl_tasklist` WHERE id = ?";
+    db.query(query, [id], (err, result) => {
+        if (err) {
+            console.error('Error deleting task:', err);
+            return res.json({ success: false, error: err.message });
+        }
+        return res.json({ success: true });
+    });
 });
 
+app.listen(8081, () => {
+    console.log("Server listening on port 8081");
+});
