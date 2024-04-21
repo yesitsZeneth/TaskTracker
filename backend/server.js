@@ -33,6 +33,16 @@ app.get('/tbl_tasklist', (req, res) => {
     });
 });
 
+app.get('/tbl_tasklist/:id', (req, res) => {
+    const { id } = req.params;
+    const sql = "SELECT * FROM tbl_tasklist WHERE id = ?";
+    db.query(sql, [id], (err, data) => {
+        if(err) return res.json(err);
+        return res.json(data);
+    });
+});
+
+
 app.post('/add_task', (req, res) => {
     const { task_course, task_name, deadline } = req.body;
     const query = "INSERT INTO `tbl_tasklist`(`task_course`, `task_name`, `deadline`) VALUES (?, ?, ?)";
@@ -44,8 +54,8 @@ app.post('/add_task', (req, res) => {
       return res.json({ success: true });
     });
 });
-  
 
+  
 // Endpoint to handle task deletion
 app.post('/delete_task', (req, res) => {
     const id = req.body.id; // Extract id from request body
@@ -61,14 +71,14 @@ app.post('/delete_task', (req, res) => {
 
 // Endpoint to handle task update
 app.post('/update_task', (req, res) => {
-    const { id, updatedData } = req.body; // Extract id and updatedData from request body
-    const query = "UPDATE `tbl_tasklist` SET ? WHERE id = ?";
-    db.query(query, [updatedData, id], (err, result) => {
+    const { id, task_course, task_name, deadline } = req.body;
+    const query = "UPDATE `tbl_tasklist` SET `task_course`=?, `task_name`=?, `deadline`=? WHERE `id`=?";
+    db.query(query, [task_course, task_name, deadline, id], (err, result) => {
         if (err) {
             console.error('Error updating task:', err);
             return res.json({ success: false, error: err.message });
         }
-        return res.json({ success: true });
+        return res.json({ success: true }   );
     });
 });
 
