@@ -33,6 +33,19 @@ app.get('/tbl_tasklist', (req, res) => {
     });
 });
 
+app.post('/add_task', (req, res) => {
+    const { task_course, task_name, deadline } = req.body;
+    const query = "INSERT INTO `tbl_tasklist`(`task_course`, `task_name`, `deadline`) VALUES (?, ?, ?)";
+    db.query(query, [task_course, task_name, deadline], (err, result) => {
+      if (err) {
+        console.error('Error adding task:', err);
+        return res.json({ success: false, error: err.message });
+      }
+      return res.json({ success: true });
+    });
+});
+  
+
 // Endpoint to handle task deletion
 app.post('/delete_task', (req, res) => {
     const id = req.body.id; // Extract id from request body
