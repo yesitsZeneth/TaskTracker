@@ -14,7 +14,7 @@ include ("config.php");
 </head>
 <body>
 
-<h1 class="text-center">Task Details</h1>
+<h1 class="text-center">View Task</h1>
 <div class="container mt-4">
     <div class="row justify-content-center">
         <div class="col-lg-9">
@@ -39,17 +39,21 @@ include ("config.php");
                 <div class="row">
                     <div class="col-md-12 mb-3">
                         <label for="task_name" class="form-label">Task Name</label>
-                        <input type="text" class="form-control-plaintext" id="task_name" value="<?=$user['task_name'];?>" name="task_name" required>
+                        <input type="text" class="form-control" id="task_name" value="<?=$user['task_name'];?>" name="task_name" required>
                     </div>
 
                     <div class="col-md-4 mb-3">
-                        <label for="task_course" class="form-label">Course</label>
-                        <input type="text" class="form-control-plaintext" id="task_course" value="<?=$user['task_course'];?>" name="task_course" required>
+                        <label for="task_course" class="form-label">Task Description</label>
+                        <input type="text" class="form-control" id="task_course" value="<?=$user['task_course'];?>" name="task_course" required>
                     </div>
 
                     <div class="col-md-4 mb-3">
-                        <label for="deadline" class="form-label">deadline</label>
-                        <input type="text" class="form-control-plaintext" id="deadline" value="<?=$user['deadline'];?>" name="deadline">
+                        <label for="deadline" class="form-label">Deadline</label>
+                        <input type="text" class="form-control" id="deadline" value="<?=$user['deadline'];?>" name="deadline">
+                    </div>
+
+                    <div class="col-md-12 mb-3 text-center">
+                        <button type="back" class="btn btn-danger" name="backButton" style="float: left;">Back</button>
                     </div>
                 </div>
             </form>

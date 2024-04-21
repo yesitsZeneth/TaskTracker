@@ -126,4 +126,9 @@ if(isset($_POST["delete"])){
         exit();
     }
 }
+
+if (isset($_POST["backButton"])) {
+    header("Location: index.php");
+    exit();
+}
 ?>
