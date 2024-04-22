@@ -1,5 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, Image, ImageBackground  } from "react";
 import { Modal, Button } from "react-bootstrap";
+
+
 
 function App() {
   const [data, setData] = useState([]);
@@ -11,10 +13,43 @@ function App() {
   const [taskName, setTaskName] = useState('');
   const [taskDescription, setTaskDescription] = useState('');
   const [deadline, setDeadline] = useState('');
+  const [modalBodyStyles, setModalBodyStyles] = useState({});
 
   useEffect(() => {
     fetchData();
+    updateModalBodyStyles(); // Update styles initially
+    window.addEventListener("resize", updateModalBodyStyles); // Add event listener for window resize
+    return () => window.removeEventListener("resize", updateModalBodyStyles); // Cleanup event listener
   }, []);
+
+  const updateModalBodyStyles = () => {
+    const windowWidth = window.innerWidth;
+    const windowHeight = window.innerHeight;
+
+    if (windowWidth >= 1080 && windowHeight >= 2400) {
+      setModalBodyStyles({
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "flex-start",
+        backgroundColor: "#011F4B",
+        minHeight: "100vh",
+        alignItems: "center",
+        padding: "20px", // Adjust styles as needed
+        fontSize: "18px" // Adjust styles as needed
+      });
+    } else {
+      setModalBodyStyles({
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "flex-start",
+        backgroundColor: "#011F4B",
+        minHeight: "100vh",
+        alignItems: "center",
+        padding: "10px", // Adjust styles as needed
+        fontSize: "16px" // Adjust styles as needed
+      });
+    }
+  };
 
   const fetchData = async () => {
     try {
@@ -123,24 +158,36 @@ function App() {
   };
 
   return (
-    <div className="card">
-      <h2>Task Track ejManagement</h2>
+<div className="card" style={{ 
+  backgroundColor: '#011F4B', 
+  boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)', 
+  borderRadius: '8px', 
+  padding: '20px', 
+  marginBottom: '20px',
+  marginTop: '100px',
+  // display: "flex", 
+  // justifyContent: "center",
+  // alignItems: "center",
+  
+}}><br/>
+<h2 style={{ display: "flex", justifyContent: "center", alignItems: "center", marginTop: "5%", color: '#fff', fontSize: '50px', fontWeight: 'bold', textAlign: 'center', textTransform: 'uppercase' }}>Task Tracker</h2>
       <div>
       <Button onClick={() => { setShowEditModal(false); setShowAddModal(true); }} style={{ float: 'right' }} className="btn btn-primary">
       Add Task
     </Button>
       </div>
-      <div className="card-body">
+      <div className="card-body" style={{ marginLeft: '20%', display: 'flex-column', justifyContent: 'center', alignItems: 'top', marginTop: '20px' }}>
         <table>
-          <thead>
-            <tr>
-              <th>Task Title</th>
-              <th>Task Description</th>
-              <th>Deadline</th>
-              <th>Action</th>
-            </tr>
+          <thead classname="theadbody" style={{ margin: "auto", color: '#fff', fontSize: '15px', fontWeight: 'bold', textAlign: 'center', padding: '10px' }}>
+            <tr className="trlist" style={{ margin: "auto", color: '#fff', fontSize: '15px', fontWeight: 'bold', textAlign: 'center', padding: '10px' }}>
+  <th style={{ margin: "auto", color: '#fff', fontSize: '15px', fontWeight: 'bold', textAlign: 'center', padding: '10px' }}>Task Title</th>
+  <th style={{ margin: "auto", color: '#fff', fontSize: '15px', fontWeight: 'bold', textAlign: 'center', padding: '10px' }}>Description</th>
+  <th style={{ margin: "auto", color: '#fff', fontSize: '15px', fontWeight: 'bold', textAlign: 'center', padding: '10px' }}>Deadline</th>
+  <th style={{ margin: "auto", color: '#fff', fontSize: '15px', fontWeight: 'bold', textAlign: 'center', padding: '10px' }}>Action</th>
+</tr>
+
           </thead>
-          <tbody>
+          <tbody style={{ margin: "auto", color: '#fff', fontSize: '15px', textAlign: 'center', padding: '10px' }}>
             {data.map((task, i) => (
               <tr key={i}>
                 <td>{task.task_course}</td>
@@ -157,32 +204,43 @@ function App() {
         </table>
       </div>
       <Modal show={showAddModal} onHide={handleCloseAddModal}>
-      <Modal.Title>Add Task</Modal.Title>
-  <Modal.Body>
+      <Modal.Body style={{
+  display: 'flex', 
+  flexDirection: 'column', 
+  justifyContent: 'flex-start', 
+  backgroundColor: "#011F4B", 
+  minHeight: "100vh", 
+  alignItems: 'center',
+}}>
     <form onSubmit={handleSubmit}>
-      <div className="form-group">
-        <label htmlFor="taskName">Task Name:</label>
-        <input
-          type="text"
-          className="form-control"
-          id="taskName"
-          value={taskName}
-          onChange={(e) => setTaskName(e.target.value)}
-          required
-        />
+    <div className="form-group" style={{ display: 'flex-column', justifyContent: 'center', alignItems: 'top', marginTop: '20px' }}>
+    <label style={{ display: 'flex', justifyContent: 'center', alignItems: 'flex-start', fontSize: "75px", color: '#fff', marginTop: '100px', marginBottom: '100px' }}>ADD TASK</label><br />
+    <label htmlFor="taskName" style={{ display: 'flex-column', justifyContent: 'center',marginTop: '150px', fontSize: "30px", color: "white" }}>TASK TITLE</label><br />
+      <input
+      type="text"
+      className="form-control"
+      id="taskName"
+      value={taskName}
+      onChange={(e) => setTaskName(e.target.value)}
+      required
+      style={{ width: '100%', height: '50px', marginBottom: '20px', marginTop: '10px', resize: "none", backgroundColor: '#C7D6DE' }}
+    />
+
+    
       </div>
-      <div className="form-group">
-        <label htmlFor="taskDescription">Task Description:</label>
+      <div className="form-group" style={{ marginTop: '75px',display: 'flex-column', justifyContent: 'center', alignItems: 'top', }}>
+      <label htmlFor="taskDescription" style={{ marginTop: '50px', fontSize: "30px", color: "white", textAlign: "center" }}>TASK DESCRIPTION</label><br />
         <textarea
           className="form-control"
           id="taskDescription"
           value={taskDescription}
           onChange={(e) => setTaskDescription(e.target.value)}
           required
+          style={{ width: '100%', height: '75px',marginBottom: '20px', marginTop: '10px', resize: "none", backgroundColor: '#C7D6DE' }}
         ></textarea>
       </div>
-      <div className="form-group">
-        <label htmlFor="deadline">Deadline:</label>
+      <div className="form-group" style={{ marginTop: '75px',display: 'flex-column', justifyContent: 'center', alignItems: 'top', }}>
+        <label htmlFor="deadline"style={{ marginTop: '50px', fontSize: "30px", color: "white" }}>DEADLINE</label><br />
         <input
           type="date"
           className="form-control"
@@ -190,17 +248,24 @@ function App() {
           value={deadline}
           onChange={(e) => setDeadline(e.target.value)}
           required
+          style={{ fontSize: "30px",width: '100%', height: '50px', marginBottom: '20px', marginTop: '10px', resize: "none", backgroundColor: '#C7D6DE'  }}
         />
       </div>
-      <Button type="submit" className="btn btn-outline-danger">
-        Create
-      </Button>
+      <div style={{ marginTop: '10%', display: 'flex-column', justifyContent: 'center' }}>
+      <div>
+      <Button type="submit" className="btn btn-outline-danger" style={{ marginTop: '20px', padding: '30px 60px', borderRadius: '5px', boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)', fontSize: '25px' }}>
+     Create
+    </Button></div>
+    <div>
+    <Button Button type="submit" className="btn btn-outline-danger" style={{ marginTop: '20px', padding: '30px 60px', borderRadius: '5px', boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)', fontSize: '25px' }}>
+     Cancel
+    </Button>
+    </div>
+    </div>
+
     </form>
   </Modal.Body>
     <Modal.Footer>
-    <Button variant="primary" onClick={handleCloseAddModal}>
-      Cancel
-    </Button>
   </Modal.Footer>
       </Modal>
 
