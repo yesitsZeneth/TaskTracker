@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, Button, TextInput, FlatList, TouchableOpacity, Modal } from 'react-native';
+import { View, Text, Button, TextInput, FlatList, TouchableOpacity, Modal, StyleSheet } from 'react-native';
+
 
 function App() {
   const [data, setData] = useState([]);
@@ -137,30 +138,67 @@ function App() {
     return formattedDate;
   };
 
+  const styles = StyleSheet.create({
+    columnHeader: {
+      flex: 1,
+      color: '#FFFFFF',
+      fontWeight: 'bold',
+      textAlign: 'center',
+      fontSize: 12,
+    },
+  });
+
+  const textStyles = StyleSheet.create({
+    text: {
+      color: '#FFFFFF', // White font color
+      textAlign: 'center', // Horizontal alignment
+      alignSelf: 'center', // Vertical alignment
+    },
+  });  
+  
+  const buttonStyles = StyleSheet.create({
+    button: {
+      backgroundColor: '#6497B1',
+      paddingVertical: 0,
+      paddingHorizontal: 5,
+      borderRadius: 5,
+      marginRight: 5,
+    },
+    buttonText: {
+      color: '#FFFFFF',
+    },
+  });
+  
   return (
-    <View style={{ flex: 1 }}>
-      <Text style={{ fontSize: 24, textAlign: 'center', marginTop: 20 }}>Task Track Management</Text>
+    <View style={{ flex: 1, backgroundColor: '#011F4B'}}>
+      <Text style={{ fontSize: 24, textAlign: 'center', marginTop: 20, color: '#FFFFFF'}}>Task Track Management</Text>
       <View style={{ flexDirection: 'row', justifyContent: 'flex-end', marginHorizontal: 20, marginTop: 20 }}>
         <Button title="Add Task" onPress={() => { setShowEditModal(false); setShowTaskModal(false); setShowAddModal(true); }} />
+      </View>
+      <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 10 }}>
+        <Text style={styles.columnHeader}>Task Title</Text>
+        <Text style={styles.columnHeader}>Task Description</Text>
+        <Text style={styles.columnHeader}>Deadline</Text>
+        <Text style={styles.columnHeader}>Action</Text>
       </View>
       <View style={{ margin: 20 }}>
         <FlatList
           data={data}
           keyExtractor={(item) => item.id.toString()}
           renderItem={({ item }) => (
-            <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginBottom: 10 }}>
-              <Text>{item.task_course}</Text>
-              <Text>{item.task_name}</Text>
-              <Text>{formatDate(item.deadline)}</Text>
+            <View style={{borderBottomWidth: 1, borderBottomColor: '#FFFFFF', flexDirection: 'row', justifyContent: 'space-between', marginBottom: 20 }}>
+              <Text style={textStyles.text}>{item.task_course}</Text>
+              <Text style={textStyles.text}>{item.task_name}</Text>
+              <Text style={textStyles.text}>{formatDate(item.deadline)}</Text>
               <View style={{ flexDirection: 'row' }}>
-                <TouchableOpacity onPress={() => handleView(item.id)}>
-                  <Text style={{ color: 'red', marginRight: 10 }}>VIEW</Text>
+                <TouchableOpacity onPress={() => handleView(item.id)} style={buttonStyles.button}>
+                  <Text style={buttonStyles.buttonText}>VIEW</Text>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() => handleEditModal(item)}>
-                  <Text style={{ color: 'red', marginRight: 10 }}>EDIT</Text>
+                <TouchableOpacity onPress={() => handleEditModal(item)} style={buttonStyles.button}>
+                  <Text style={buttonStyles.buttonText}>EDIT</Text>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() => handleDelete(item.id)}>
-                  <Text style={{ color: 'red' }}>DELETE</Text>
+                <TouchableOpacity onPress={() => handleDelete(item.id)} style={buttonStyles.button}>
+                  <Text style={buttonStyles.buttonText}>DELETE</Text>
                 </TouchableOpacity>
               </View>
             </View>
