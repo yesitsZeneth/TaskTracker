@@ -19,11 +19,23 @@ include ("config.php");
 
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">Task Tracking Management</h5>
+            <div class="row">
+  <div class="col">
+    <div class="card-body1">
+      <h5 class="card-title1">Task Tracker</h5>
+    </div>
+  </div>
+  <div class="col">
+    <img src="assets/profile.png" title="Emmanuelle James P. Duallo"  alt="Emmanuelle James P. Duallo"
+            style="width: 100px; height: 100px; object-fit: cover;">
+      <h5 class="card-title2">Emmanuelle James P. Duallo</h5>
+  </div>
+  </div>
+</div>
               <a href="insert.php" style="float: right;" class="btn btn-primary">Add Task</a>
               <!-- Table with stripped rows -->
               <table class="table datatable">
-                <thead>
+                <thead class="trlist">
                   <tr>
                     <th class="col">Task Title</th>
                     <th class="col">Task Description</th>
@@ -42,7 +54,7 @@ include ("config.php");
                 foreach($query_run as $row)
                 {
                 ?>
-                    <tr>
+                    <tr  class="trlistsql">
                 <td><?= $row['task_name']; ?></td>
                 <td><b><?= $row['task_course']; ?>
                 <td><?= $row['deadline']; ?></td>
