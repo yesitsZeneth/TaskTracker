@@ -131,7 +131,7 @@ function App() {
 
   return (
     <View style={{ flex: 1 }}>
-      <Text style={{ fontSize: 24, textAlign: 'center', marginTop: 20 }}>Task Track Management</Text>
+      <Text style={{ fontSize: 24, textAlign: 'center', marginTop: 20 }}>Task Track MMMMMManagement</Text>
       <View style={{ flexDirection: 'row', justifyContent: 'flex-end', marginHorizontal: 20, marginTop: 20 }}>
         <Button title="Add Task" onPress={() => { setShowEditModal(false); setShowTaskModal(false); setShowAddModal(true); }} />
       </View>

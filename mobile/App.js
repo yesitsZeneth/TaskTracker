@@ -19,7 +19,7 @@ function App() {
 
   const fetchData = async () => {
     try {
-      const response = await fetch('http://192.168.1.24:8081/tbl_tasklist'); // Replace 192.168.1.24 with your actual backend server's IP address
+      const response = await fetch('http://192.168.137.1:8081/tbl_tasklist'); // Replace 192.168.137.1 with your actual backend server's IP address
       const jsonData = await response.json();
       setData(jsonData);
     } catch (error) {
@@ -29,7 +29,7 @@ function App() {
 
   const handleDelete = async (id) => {
     try {
-      const response = await fetch('http://192.168.1.24:8081/delete_task', { // Replace 192.168.1.24 with your actual backend server's IP address
+      const response = await fetch('http://192.168.137.1:8081/delete_task', { // Replace 192.168.137.1 with your actual backend server's IP address
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -48,7 +48,7 @@ function App() {
 
   const handleView = async (id) => {
     try {
-      const response = await fetch(`http://192.168.1.24:8081/tbl_tasklist/${id}`); // Replace 192.168.1.24 with your actual backend server's IP address
+      const response = await fetch(`http://192.168.137.1:8081/tbl_tasklist/${id}`); // Replace 192.168.137.1 with your actual backend server's IP address
       const taskData = await response.json();
       console.log("Retrieved task data:", taskData); // Log the retrieved data
       if (taskData && taskData.length > 0) {
@@ -78,7 +78,7 @@ function App() {
 
   const handleUpdate = async () => {
     try {
-      const response = await fetch('http://192.168.1.24:8081/update_task', { // Replace 192.168.1.24 with your actual backend server's IP address
+      const response = await fetch('http://192.168.137.1:8081/update_task', { // Replace 192.168.137.1 with your actual backend server's IP address
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -112,7 +112,7 @@ function App() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await fetch('http://192.168.1.24:8081/add_task', { // Replace 192.168.1.24 with your actual backend server's IP address
+      const response = await fetch('http://192.168.137.1:8081/add_task', { // Replace 192.168.137.1 with your actual backend server's IP address
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
