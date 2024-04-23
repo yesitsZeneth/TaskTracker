@@ -177,7 +177,7 @@ function App() {
       </View>
       <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 10 }}>
         <Text style={styles.columnHeader}>Task Title</Text>
-        <Text style={styles.columnHeader}>Task Description</Text>
+        <Text style={styles.columnHeader}>Task Descriptions</Text>
         <Text style={styles.columnHeader}>Deadline</Text>
         <Text style={styles.columnHeader}>Action</Text>
       </View>
