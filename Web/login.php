@@ -23,9 +23,9 @@
 
           <!-- Email input -->
           <div class="form-outline mb-4">
-          <label class="form-label" for="form3Example3">Email address</label>
-            <input type="email" id="form3Example3" class="form-control form-control-lg"
-              placeholder="Enter a valid email address"  name="email" required>
+          <label class="form-label" for="form3Example3">Student ID</label>
+            <input type="text" id="form3Example3" class="form-control form-control-lg"
+              placeholder="Enter your student id"  name="student_id" required>
           </div>
 
           <!-- Password input -->
@@ -80,6 +80,22 @@ if (isset($_SESSION['status']) && $_SESSION['status_code'] != '' )
         unset($_SESSION['status']);
         unset($_SESSION['status_code']);
 }
+
+if (mysqli_num_rows($login_result) == 1) {
+  $user = mysqli_fetch_assoc($login_result);
+  $_SESSION['loggedin'] = true;
+  $_SESSION['student_id'] = $user['student_id']; // Store student_id in session
+  $_SESSION['firstname'] = $user['firstname'];
+  $_SESSION['middlename'] = $user['middlename'];
+  $_SESSION['lastname'] = $user['lastname'];
+  $_SESSION['status'] = "Welcome!";
+  $_SESSION['status_code'] = "success";
+  header("Location: index.php");
+  exit();
+}
+
+
 ?>
+
   </body>
 </html>

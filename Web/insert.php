@@ -22,12 +22,12 @@ include ("config.php");
                 <div class="row">
                     <div class="col-md-12 mb-3">
                         <label for="task_name" class="form-label">Task Name</label>
-                        <input type="text" placeholder="Enter Student ID" class="form-control" name="task_name">
+                        <input type="text" placeholder="Task Name" class="form-control" name="task_name">
                     </div>
 
                     <div class="col-md-4 mb-3">
-                        <label for="task_course" class="form-label">Course</label>
-                        <input type="text" placeholder="Course" class="form-control" name="task_course">
+                        <label for="task_course" class="form-label">Description</label>
+                        <input type="text" placeholder="Description" class="form-control" name="task_course">
                     </div>
 
                     <div class="col-md-4 mb-3">

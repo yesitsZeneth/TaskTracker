@@ -25,22 +25,25 @@ app.get('/', (req, res) => {
     return res.json("From Backend Side");
 });
 
-app.get('/tbl_tasklist', (req, res) => {
-    const sql = "SELECT * FROM tbl_tasklist";
+app.get('/tasklist', (req, res) => {
+    const sql = "SELECT tbl_tasklist.*, tbl_users.firstname, tbl_users.lastname FROM tbl_tasklist INNER JOIN tbl_users ON tbl_tasklist.student_id = tbl_users.student_id";
     db.query(sql, (err, data) => {
         if(err) return res.json(err);
         return res.json(data);
     });
 });
 
+
+
 app.get('/tbl_tasklist/:id', (req, res) => {
     const { id } = req.params;
-    const sql = "SELECT * FROM tbl_tasklist WHERE id = ?";
+    const sql = "SELECT tbl_tasklist.*, tbl_users.firstname, tbl_users.lastname FROM tbl_tasklist INNER JOIN tbl_users ON tbl_tasklist.student_id = tbl_users.student_id WHERE tbl_tasklist.id = ?";
     db.query(sql, [id], (err, data) => {
         if(err) return res.json(err);
         return res.json(data);
     });
 });
+    
 
 
 app.post('/add_task', (req, res) => {
