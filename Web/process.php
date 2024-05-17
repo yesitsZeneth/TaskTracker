@@ -10,7 +10,6 @@ function isGoogleAccount($email) {
 }
 
 if (isset($_POST["registerButton"])) {
-
     $student_id = $_POST['student_id'];
     $password = $_POST['password'];
     $repassword = $_POST['repassword'];
@@ -45,12 +44,17 @@ if (isset($_POST["registerButton"])) {
         exit();
     }
 
-    // Insert the user details into the database
-    $query = "INSERT INTO `tbl_users`(`student_id`, `password`, `firstname`, `middlename`, `lastname`, `email`) VALUES ('$student_id','$password','$firstname','$middlename','$lastname','$email')";
+    // Hash the password before saving to the database
+    $password_hashed = md5($password); // or use a more secure hashing method like bcrypt
+
+    // Default profile picture URL
+    $image = "img/pfp.jpg";
+
+    // Insert the user details into the database with default profile picture URL
+    $query = "INSERT INTO `tbl_users`(`student_id`, `password`, `firstname`, `middlename`, `lastname`, `email`, `image`) VALUES ('$student_id','$password_hashed','$firstname','$middlename','$lastname','$email','$image')";
     $query_result = mysqli_query($con, $query);
 
     if ($query_result) {
-        // Set the student_id in the session after successful registration
         $_SESSION['student_id'] = $student_id;
         $_SESSION['status'] = "Registration Successful!";
         $_SESSION['status_code'] = "success";
@@ -60,17 +64,19 @@ if (isset($_POST["registerButton"])) {
 }
 
 if (isset($_POST["loginButton"])) {
-
     $student_id = $_POST['student_id'];
     $password = $_POST['password'];
 
-    $login_query = "SELECT `student_id`, `password`, `firstname`, `middlename`, `lastname` FROM `tbl_users` WHERE `student_id` = '$student_id' AND `password` = '$password' LIMIT 1 ";
+    // Hash the password to match the stored hash
+    $password_hashed = md5($password); // or use the same hashing method as during registration
+
+    $login_query = "SELECT `student_id`, `password`, `firstname`, `middlename`, `lastname` FROM `tbl_users` WHERE `student_id` = '$student_id' AND `password` = '$password_hashed' LIMIT 1";
     $login_result = mysqli_query($con, $login_query);
 
     if (mysqli_num_rows($login_result) == 1) {
         $user = mysqli_fetch_assoc($login_result);
         $_SESSION['loggedin'] = true;
-        $_SESSION['student_id'] = $student_id; // Set the student_id in the session after successful login
+        $_SESSION['student_id'] = $user['student_id'];
         $_SESSION['firstname'] = $user['firstname'];
         $_SESSION['middlename'] = $user['middlename'];
         $_SESSION['lastname'] = $user['lastname'];
@@ -91,7 +97,6 @@ if (isset($_POST["submitButton"])) {
     $task_name = $_POST['task_name'];
     $deadline = $_POST['deadline'];
     
-    // Get the student_id of the currently logged-in user from the session
     $student_id = $_SESSION['student_id'];
     
     $query = "INSERT INTO `tbl_tasklist`(`student_id`, `task_course`, `task_name`, `deadline`) VALUES ('$student_id', '$task_course', '$task_name', '$deadline')";
@@ -106,15 +111,12 @@ if (isset($_POST["submitButton"])) {
 }
 
 if (isset($_POST["update"])) {
-
     $id = $_POST['id'];
     $task_course = $_POST['task_course'];
     $task_name = $_POST['task_name'];
     $deadline = $_POST['deadline'];
 
-
-    $query = "UPDATE `tbl_tasklist` SET `task_course`='$task_course',`task_name`='$task_name', `deadline`='$deadline' WHERE `id` ='$id'";
-
+    $query = "UPDATE `tbl_tasklist` SET `task_course`='$task_course', `task_name`='$task_name', `deadline`='$deadline' WHERE `id` ='$id'";
     $query_result = mysqli_query($con, $query);
 
     if ($query_result) {
@@ -131,11 +133,9 @@ if (isset($_POST["update"])) {
 }
 
 if (isset($_POST["delete"])) {
-
     $id = $_POST['id'];
 
     $query = "DELETE FROM `tbl_tasklist` WHERE id = $id";
-
     $query_result = mysqli_query($con, $query);
 
     if ($query_result) {

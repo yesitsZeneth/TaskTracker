@@ -12,32 +12,37 @@ include ("config.php");
           crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body style="background-color: #eee; background-image: url('./img/tower.jpg'); background-size: cover; background-position: center; background-attachment: fixed; height: 100%;">
 
-<h1 class="text-center">Task Tracking System</h1>
-<div class="container mt-4">
+<h1 class="text-center mt-3 mb-3 fw-bold" style="color: #fcb651; font-size: 50px;">Task Tracking System</h1>
+<div class="container mt-4" style="background-color: #fcb651; border-radius: 10px; height: 60vh; width: 100vh;">
     <div class="row justify-content-center">
         <div class="col-lg-9">
             <form action="process.php" method="POST" autocomplete="off">
                 <div class="row">
-                    <div class="col-md-12 mb-3">
-                        <label for="task_name" class="form-label">Task Name</label>
+                    <div class="col-md-12 mt-5 mb-3">
+                        <label for="task_name" class="form-label fw-bold"style="color: #1a1851;font-size: 20px;">Task Name</label>
                         <input type="text" placeholder="Task Name" class="form-control" name="task_name">
                     </div>
-
                     <div class="col-md-4 mb-3">
-                        <label for="task_course" class="form-label">Description</label>
-                        <input type="text" placeholder="Description" class="form-control" name="task_course">
-                    </div>
-
-                    <div class="col-md-4 mb-3">
-                        <label for="deadline" class="form-label">Deadline</label>
+                        <label for="deadline" class="form-label fw-bold"style="color: #1a1851;font-size: 20px;">Deadline</label>
                         <input type="date" placeholder="Input Deadline" class="form-control" name="deadline">
                     </div>
 
-                    <div class="col-md-12 mb-3 text-center">
-                        <button type="submit" class="btn btn-primary"  style="float: right;" name="submitButton">Submit</button>
-                        <button type="back" class="btn btn-danger" name="backButton" style="float: left;">Back</button>
+                    <div class="col-md-4 mb-3">
+                        <label for="task_course" class="form-label fw-bold" style="color: #1a1851; font-size: 20px;">Description</label>
+                        <input type="text" 
+                            placeholder="Description" 
+                            class="form-control" 
+                            name="task_course" 
+                            style="width: 338px; height: 100px; resize: both;"
+                        >
+                    </div>
+
+
+                    <div class="col-md-12 mt-5 mb-3 text-center">
+                        <button type="submit" class="btn btn-primary fw-bold"  style="float: right; background-color: #1a1851;" name="submitButton">Submit</button>
+                        <button type="back" class="btn btn-danger fw-bold" name="backButton" style="float: left;">Back</button>
                     </div> 
                 </div>
             </form>

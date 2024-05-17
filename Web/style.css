@@ -8,12 +8,13 @@
 }
 
 .card-title1 {
-    color: #fff; /* Change color to your preferred color */
+    color: hsl(0, 100%, 50%); /* Change color to your preferred color */
     font-size: 50px; /* Change font size to your preferred size */
     font-weight: bold; /* Make the font bold */
     text-align: left; /* Center align the text */
     margin-top: 20px; /* Add top margin as needed */
 }
+
 .card-title2 {
     color: #fff; /* Change color to your preferred color */
     font-size: 30px; /* Change font size to your preferred size */
@@ -29,6 +30,12 @@
   
   .card-body {
     border: 1px solid #011F4B;
+    padding: 20px;
+    margin: 10px;
+  }
+
+  .card-bodyregister {
+    border: 100px solid #011F4B;
     padding: 20px;
     margin: 10px;
   }
@@ -80,5 +87,23 @@
     text-align: center;
     /* font-weight: bold; */
   }
+  .bg-image{
+    background-image: url('./img/tower.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    /* You might want to add additional styles for height, padding, etc. */
+}
 
-  
+.custom-mb {
+  margin-bottom: 100px; 
+}
+/* Default color for unchecked checkbox */
+.form-check-input:checked + .form-check-label::before {
+  background-color: #ff0000; /* Change color when checked */
+}
+
+/* Default color for unchecked checkbox */
+.form-check-input:not(:checked) + .form-check-label::before {
+  background-color: #1a1851; /* Change color back when unchecked */
+}
