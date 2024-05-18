@@ -1,12 +1,12 @@
 <?php session_start();
-include ("config.php");
+include("config.php");
 ?>
 <!doctype html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title></title>
+    <title>Update Task</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
           crossorigin="anonymous">
@@ -48,12 +48,21 @@ include ("config.php");
                     </div>
 
                     <div class="col-md-4 mb-3">
+                        <label for="priority" class="form-label">Priority Level</label>
+                        <select class="form-control" id="priority" name="priority" required>
+                            <option value="high" <?=$user['priority'] == 'high' ? 'selected' : '';?>>High</option>
+                            <option value="medium" <?=$user['priority'] == 'medium' ? 'selected' : '';?>>Medium</option>
+                            <option value="low" <?=$user['priority'] == 'low' ? 'selected' : '';?>>Low</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-4 mb-3">
                         <label for="deadline" class="form-label">Deadline</label>
                         <input type="date" class="form-control" id="deadline" value="<?=$user['deadline'];?>" name="deadline">
                     </div>
 
                     <div class="col-md-12 mb-3 text-center">
-                        <button type="submit" class="btn btn-primary"  style="float: right;" name="update">Update</button>
+                        <button type="submit" class="btn btn-primary" style="float: right;" name="update">Update</button>
                         <button type="back" class="btn btn-danger" name="backButton" style="float: left;">Back</button>
                     </div>
 
@@ -81,7 +90,6 @@ include ("config.php");
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
         integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
         crossorigin="anonymous"></script>
-
 
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <?php

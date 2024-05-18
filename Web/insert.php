@@ -31,6 +31,15 @@ include ("config.php");
                     </div>
 
                     <div class="col-md-4 mb-3">
+                        <label for="priority" class="form-label">Priority Level</label>
+                        <select class="form-control" name="priority">
+                            <option value="high">High</option>
+                            <option value="medium">Medium</option>
+                            <option value="low">Low</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-4 mb-3">
                         <label for="deadline" class="form-label">Deadline</label>
                         <input type="date" placeholder="Input Deadline" class="form-control" name="deadline">
                     </div>
@@ -51,7 +60,6 @@ include ("config.php");
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
         integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
         crossorigin="anonymous"></script>
-
 
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <?php

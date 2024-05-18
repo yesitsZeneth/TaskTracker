@@ -45,16 +45,24 @@ if (isset($_POST["registerButton"])) {
         exit();
     }
 
-    // Insert the user details into the database
-    $query = "INSERT INTO `tbl_users`(`student_id`, `password`, `firstname`, `middlename`, `lastname`, `email`) VALUES ('$student_id','$password','$firstname','$middlename','$lastname','$email')";
+    // Default profile picture path
+    $profile_picture = 'img/default_pfp.png';
+
+    // Insert the user details into the database with the default profile picture
+    $query = "INSERT INTO `tbl_users`(`student_id`, `password`, `firstname`, `middlename`, `lastname`, `email`, `profile_picture`) 
+              VALUES ('$student_id','$password','$firstname','$middlename','$lastname','$email','$profile_picture')";
     $query_result = mysqli_query($con, $query);
 
     if ($query_result) {
-        // Set the student_id in the session after successful registration
+        // Set the necessary session variables
+        $_SESSION['loggedin'] = true;
         $_SESSION['student_id'] = $student_id;
-        $_SESSION['status'] = "Registration Successful!";
+        $_SESSION['firstname'] = $firstname;
+        $_SESSION['middlename'] = $middlename;
+        $_SESSION['lastname'] = $lastname;
+        $_SESSION['status'] = "Welcome";
         $_SESSION['status_code'] = "success";
-        header("Location: login.php");
+        header("Location: index.php");
         exit();
     }
 }
@@ -67,10 +75,10 @@ if (isset($_POST["loginButton"])) {
     $login_query = "SELECT `student_id`, `password`, `firstname`, `middlename`, `lastname` FROM `tbl_users` WHERE `student_id` = '$student_id' AND `password` = '$password' LIMIT 1 ";
     $login_result = mysqli_query($con, $login_query);
 
-    if (mysqli_num_rows($login_result) == 1) {
+    if ($login_result && mysqli_num_rows($login_result) == 1) {
         $user = mysqli_fetch_assoc($login_result);
         $_SESSION['loggedin'] = true;
-        $_SESSION['student_id'] = $student_id; // Set the student_id in the session after successful login
+        $_SESSION['student_id'] = $student_id;
         $_SESSION['firstname'] = $user['firstname'];
         $_SESSION['middlename'] = $user['middlename'];
         $_SESSION['lastname'] = $user['lastname'];
@@ -86,15 +94,16 @@ if (isset($_POST["loginButton"])) {
     }
 }
 
+
 if (isset($_POST["submitButton"])) {
     $task_course = $_POST['task_course'];
     $task_name = $_POST['task_name'];
     $deadline = $_POST['deadline'];
-    
-    // Get the student_id of the currently logged-in user from the session
+    $priority = $_POST['priority'];
+
     $student_id = $_SESSION['student_id'];
-    
-    $query = "INSERT INTO `tbl_tasklist`(`student_id`, `task_course`, `task_name`, `deadline`) VALUES ('$student_id', '$task_course', '$task_name', '$deadline')";
+
+    $query = "INSERT INTO `tbl_tasklist`(`student_id`, `task_course`, `task_name`, `deadline`, `priority`) VALUES ('$student_id', '$task_course', '$task_name', '$deadline', '$priority')";
     $query_result = mysqli_query($con, $query);
 
     if ($query_result) {
@@ -106,14 +115,13 @@ if (isset($_POST["submitButton"])) {
 }
 
 if (isset($_POST["update"])) {
-
     $id = $_POST['id'];
     $task_course = $_POST['task_course'];
     $task_name = $_POST['task_name'];
     $deadline = $_POST['deadline'];
+    $priority = $_POST['priority']; // Added priority input
 
-
-    $query = "UPDATE `tbl_tasklist` SET `task_course`='$task_course',`task_name`='$task_name', `deadline`='$deadline' WHERE `id` ='$id'";
+    $query = "UPDATE `tbl_tasklist` SET `task_course`='$task_course', `task_name`='$task_name', `deadline`='$deadline', `priority`='$priority' WHERE `id` ='$id'";
 
     $query_result = mysqli_query($con, $query);
 
