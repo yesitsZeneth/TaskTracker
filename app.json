@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "mobile",
-    "slug": "mobile",
+    "name": "TaskTrackMobile",
+    "slug": "TaskTrackMobile",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -21,23 +21,10 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-<<<<<<< HEAD
-      },
-      "package": "com.delvince11.mobile"
-    },
-    "web": {
-      "favicon": "./assets/favicon.png"
-    },
-    "extra": {
-      "eas": {
-        "projectId": "1be21082-ed4c-4218-a07b-14eb20d27cb8"
-      }
-=======
       }
     },
     "web": {
       "favicon": "./assets/favicon.png"
->>>>>>> c885d8783d0cbcdcdb17ff6657a6472331994d9c
     }
   }
 }
